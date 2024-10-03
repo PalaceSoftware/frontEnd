@@ -131,7 +131,7 @@ export default function Changhoji() {
                         zIndex: -1,
                     }}
                 />
-                <img src={backToNakseonjae} alt="낙선재로 돌아가기" style={{ position: 'fixed', width: '30px', top: '50px', left: '1620px', zIndex: 1, }} onClick={handleBackToNakseonjae}/>
+                <img src={backToNakseonjae} alt="낙선재로 돌아가기" style={{ position: 'fixed', width: '30px', top: '50px', left: '1620px', zIndex: 2, }} onClick={handleBackToNakseonjae}/>
                 {currentImageIndex === changhojiImages.length - 1 && (
                     <>
                         {candleIndex === 0 ? (
@@ -259,13 +259,13 @@ export default function Changhoji() {
                                     src={nextPage}
                                     alt="Next Page"
                                     onClick={handleNextPageClick}
-                                    style={{ position: 'absolute', top: '5030px', left: '1250px', transform: 'translate(-50%, -50%)', zIndex: 4, cursor: 'pointer' }}
+                                    style={{ position: 'absolute', top: '5030px', left: '1250px', transform: 'translate(-50%, -50%)', zIndex: 4 }}
                                 />
                                 <img
                                     src={closeBook}
                                     alt="Close Book"
                                     onClick={handleCloseBookClick}
-                                    style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3 }}
                                 />
                             </>
                         )}
@@ -280,13 +280,13 @@ export default function Changhoji() {
                                     src={prevPage}
                                     alt="Previous Page"
                                     onClick={handlePrevPageClick}
-                                    style={{ position: 'absolute', top: '5030px', left: '450px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    style={{ position: 'absolute', top: '5030px', left: '450px', transform: 'translate(-50%, -50%)', zIndex: 3}}
                                 />
                                 <img
                                     src={closeBook}
                                     alt="Close Book"
                                     onClick={handleCloseBookClick}
-                                    style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3}}
                                 />
                             </>
                         )}
