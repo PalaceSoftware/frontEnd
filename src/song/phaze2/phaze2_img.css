@@ -64,8 +64,9 @@
 
 .water2 {
     position: absolute;
-    bottom: 0px;
-    left: -700px;
+    width: 150%;
+    bottom: -30px;
+    left: -400px;
     z-index: 4;
     opacity: 0;
     height: auto; /* 비율을 유지하면서 자동 높이 */
