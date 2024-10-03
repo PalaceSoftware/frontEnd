@@ -4,7 +4,7 @@ import '../song/phaze5/phaze5_base.css'
 import '../song/phaze5/phaze5_img.css'
 import '../song/phaze5/phaze5_explain.css'
 
-export default function Fourth() {
+export default function Phaze5() {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [imgsVisible, setImgsVisible] = useState(false);
     const [fogVisible, setFogVisible] = useState(false);
@@ -14,7 +14,10 @@ export default function Fourth() {
     const [zeoliteBack, setZeoliteBack] = useState(false); // 비석 뒤로 움직이기 + 작아지기
     const [zeolitesVisible, setZeolitesVisible] = useState(false); // zeolites 이미지 가시성 상태
     const [sinhaScale, setSinhaScale] = useState(1); // sinha의 크기
+    const [explainOffset, setExplainOffset] = useState(0);
+    const [nextBackground, setNextBackground] = useState(0);
 
+    const navigate = useNavigate(); // For page navigation
 
     useEffect(() => {
 
@@ -38,19 +41,15 @@ export default function Fourth() {
           });
 
           // 스크롤 위치에 따른 안개의 투명도 조정
-          if(!fogVisible && scrollPosition <= 750) {
-            const fogOpacity = 1 - scrollPosition / 500;
+          if(!fogVisible && scrollPosition <= 1500) {
+            const fogOpacity = 1 - scrollPosition / 1500;
             
             document.querySelector('.fog5_1').style.opacity = fogOpacity;
             document.querySelector('.fog5_2').style.opacity = fogOpacity;
           }
 
-          // 스크롤이 500에 도달하면 zeolite와 explain 이미지들 애니메이션 실행
-          if (scrollPosition > 750 && !zeoliteBack) {
-            setFogVisible(true);
+          if(scrollPosition > 0 && !zeoliteBack) {
             setAnimationOn(true);
-            setZeoliteBack(true);
-
             for (let i = 0; i < 3; i++) {
               setTimeout(() => {
                 setExplainVisible((prevState) => {
@@ -60,23 +59,59 @@ export default function Fourth() {
                 });
               }, i * 500);
             }
-            
-            setTimeout(() => setZeolitesVisible(true), 4000); // 2초 후 애니메이션 상태 해제
-            setTimeout(() => setAnimationOn(false), 5000); // 2초 후 애니메이션 상태 해제
-        }
-
-          // 스크롤이 700에 도달하면 zeolites 이미지가 등장
-          if (scrollPosition > 700 && !zeolitesVisible) {
+            setTimeout(() => {
+              setAnimationOn(false);
+              setZeoliteBack(true);
+            }, 4000); // 2초 후 애니메이션 상태 해제
           }
+
+          // 스크롤이 500에 도달하면 zeolite와 explain 이미지들 애니메이션 실행
+          if (scrollPosition > 1500 && !fogVisible) {
+            setFogVisible(true);
+            setAnimationOn(true);
+
+            setSinhaScale(0.4);
+            setTimeout(() => setZeolitesVisible(true), 4000); // 2초 후 애니메이션 상태 해제
+            setTimeout(() => {
+              setAnimationOn(false);
+              setExplainOffset(1);
+              setExplainVisible([false, false, false]);
+            }, 4000); // 2초 후 애니메이션 상태 해제
+        }
 
           // sinha 이미지의 이동과 크기 변화
           if (zeolitesVisible) {
             setSinhaScale((nowSinhaScale) => {
-                const newSinhaScale = nowSinhaScale + (scrollPosition * 0.001);
+                if(nowSinhaScale < 0.39999999999) return 0.4;
+                if(nowSinhaScale > 1.3) {
+                  if(!nextBackground) {
+                    setTimeout(() => setNextBackground(true), 3000); // 2초 후 애니메이션 상태 해제                
+                  }
+                  return 1.3;
+                }
+
+                const newSinhaScale = nowSinhaScale + (delta * 0.0001);
                 return newSinhaScale;
+            });
+
+            setExplainOffset((prev) => {
+              const newOpacity = Math.min(Math.max(prev - delta * 0.0003, 0), 1); // 0~1 사이로 제한
+
+              if(sinhaScale < 0.39999999999) return 1;
+              if(sinhaScale >= 1.3) {
+                return 0;
+              }
+    
+              return newOpacity;
             });
           }
         };
+
+        if(nextBackground) {
+          setTimeout(() => {
+            navigate("/phaze6"); // Redirect to another page after zoom
+          }, 1000);
+        }
     
         window.addEventListener("wheel", handleScroll, { passive: false });
     
@@ -91,23 +126,31 @@ export default function Fourth() {
                 <img src="/images/song/phaze5/background5.png" alt='background' className="background5"/>
                 <img src="/images/song/phaze5/fog5_1.png" className={`fog5_1 ${imgsVisible ? 'visible5' : fogVisible ? 'hidden5' : ''}`}/>       
                 <img src="/images/song/phaze5/fog5_2.png" className={`fog5_2 ${imgsVisible ? 'visible5' : fogVisible ? 'hidden5' : ''}`}/>
-                <img src="/images/song/phaze5/zeolite5.png" className={`zeolite5 ${imgsVisible ? 'visible5' : zeoliteBack ? 'hidden5' : ''}`}/>
+                <img src="/images/song/phaze5/zeolite5.png" className={`zeolite5 ${(imgsVisible && !zeoliteBack) ? 'visible5' : (imgsVisible && zeoliteBack) ? 'hidden5' : ''}`}/>
 
-                <img src="/images/song/phaze5/explain5_1.png" className={`explain5_1 ${explainVisible[0] ? 'slideIn5' : ''}`}/>
-                <img src="/images/song/phaze5/explain5_2.png" className={`explain5_2 ${explainVisible[1] ? 'slideIn5' : ''}`}/>
-                <img src="/images/song/phaze5/explain5_3.png" className={`explain5_3 ${explainVisible[2] ? 'slideIn5' : ''}`}/>
+                <img src="/images/song/phaze5/explain5_1.png" 
+                  className={`explain5_1 ${explainVisible[0] ? 'slideIn5' : ''}`}
+                  style={{ opacity: explainOffset }}
+                />
+                <img src="/images/song/phaze5/explain5_2.png" 
+                  className={`explain5_2 ${explainVisible[1] ? 'slideIn5' : ''}`}
+                  style={{ opacity: explainOffset }}
+                  />
+                <img src="/images/song/phaze5/explain5_3.png" 
+                  className={`explain5_3 ${explainVisible[2] ? 'slideIn5' : ''}`}
+                  style={{ opacity: explainOffset }}
+                  />
 
                 <img src="/images/song/phaze5/zeolites5.png" className={`zeolites5 ${zeolitesVisible ? 'fade-in-up' : ''}`}/>
 
-                <img src="/images/song/phaze5/sinha5_1.png" 
-                className={`sinha5_1 ${zeolitesVisible ? 'fade-in-up' : ''}`}
-                style={{ transform: `scale(${sinhaScale})` }}
-                />
-                <img src="/images/song/phaze5/sinha5_2.png" 
-                className={`sinha5_2 ${zeolitesVisible ? 'fade-in-up' : ''}`}
+                <img src="/images/song/phaze5/sinha5.png" 
+                className={`sinha5 ${zeolitesVisible ? 'fade-in-up' : ''}`}
                 style={{ transform: `scale(${sinhaScale})` }}
                 />
 
+                <img src="/images/song/phaze6/background6_1.png"
+                  className={`next_background ${nextBackground ? 'showNext' : ''}`}
+                />
             </div>
         </div>
     );

@@ -135,7 +135,7 @@
 }
 
 .world.zoom {
-  transform: scale(5.0); /* Zoom the world */
+  transform: scale(5.3); /* Zoom the world */
   transition: transform 1.5s ease-in-out;
 }
 
@@ -175,4 +175,13 @@
 
 .first-door-right.open-forward {
   transform: translateX(1710px) translateZ(-1000px);
+}
+
+.explain1 {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  z-index: 15;
+  bottom: 100px;
+  left: 450px;
 }

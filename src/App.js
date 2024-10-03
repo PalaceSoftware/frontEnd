@@ -1,7 +1,7 @@
 import './App.css';
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CaptureProvider } from './captureComtext';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+
 import Role from "./test/Role";
 
 import Test2 from "./test/Test2";
@@ -32,6 +32,17 @@ import Phaze7 from "./song/Phaze7";
 
 
 import Layout from './song/cursor/Layout';
+
+function RedirectToPhaze1() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // '/' 경로에 접근할 때 '/phaze1'로 리디렉션
+    navigate('/phaze1');
+  }, [navigate]);
+
+  return null;
+}
 
 function App() {
   useEffect(() => {
@@ -69,7 +80,6 @@ function App() {
                   <Route path='/quiz2' element={<Quiz2 />} />
                   <Route path='/quiz3' element={<Quiz3 />} />
                   <Route path='/another' element={<Another />} />
-
                 </Routes></Layout>} />
           </Routes>
         </Router>

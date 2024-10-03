@@ -104,10 +104,10 @@ export default function Phaze3() {
             setImgs2Visible(true);
             setTimeout(() => {
                 setBlinkWindow(true);
-            }, 5000);
+            }, 13000);
             setTimeout(() => {
                 navigate("/phaze4"); // Redirect to another page after zoom
-            }, 8000);
+            }, 18000);
           }
         };
     

@@ -87,13 +87,11 @@
     opacity: 0;
     transition: opacity 1s ease-in-out;
   }
-
-  .white-overlay.active7_2 {
+  
+  .active7_2 {
     opacity: 1;
     z-index: 15;
   }
-
-  
 
   .flower1 {
     position: absolute;

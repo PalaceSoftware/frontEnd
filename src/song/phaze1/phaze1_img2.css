@@ -36,8 +36,8 @@
     position: absolute;
     width: 100%;
     height: auto;
-    top: 110px;
-    left: -20px;
+    top: 109px;
+    left: -9px;
     opacity: 0;
     z-index: 6;
     transition: opacity 1.5s ease-in-out;

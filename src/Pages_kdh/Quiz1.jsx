@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Quiz1.css';
 
 function Quiz1() {
     const [answer, setAnswer] = useState(''); // 정답 상태 관리
     const [isCorrect, setIsCorrect] = useState(null); // 정답 여부 관리
     const [showModal, setShowModal] = useState(false); // 모달 표시 여부
+    const [previousPage, setPreviousPage] = useState('/scrolldownpage#quiz'); // 기본 경로 설정
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // 정답 확인 함수
     const checkAnswer = () => {
@@ -22,10 +25,23 @@ function Quiz1() {
         setShowModal(false); // 모달 닫기
     };
 
-    // // x 버튼 클릭 시 페이지 이동
-    // const handleCloseClick = () => {
-    //     window.location.href = 'http://localhost:3000/scrolldownpage#quiz'; // 직접 해시 링크로 이동
-    // };
+    // 컴포넌트가 마운트될 때 이전 페이지의 경로를 상태로 설정
+    useEffect(() => {
+        console.log("location.state:", location.state); // 전달받은 state 로그 출력
+        if (location.state && location.state.from) {
+            setPreviousPage(location.state.from); // 전달받은 경로가 있으면 설정
+        }
+    }, [location]);
+
+    // x 버튼 클릭 시 페이지 이동
+    const handleCloseClick = () => {
+        // location.state가 있으면 전달받은 경로로, 없으면 기본값 설정
+        const newPage = location.state && location.state.from
+            ? location.state.from // 전달받은 경로로 돌아가기
+            : '/scrolldownpage#quiz'; // 만약 from이 없으면 기본 경로로 이동 (예외 처리)
+
+        navigate(newPage); // 전달받은 경로로 이동
+    };
 
     return (
         <div className="quiz1">
@@ -49,10 +65,7 @@ function Quiz1() {
 
             <img src={process.env.PUBLIC_URL + '/quiz1-group.png'} alt="duru" className="duru" />
             <div className='paper'>
-                <Link to="/scrolldownpage#quiz">
-                    <button className="close-paper-btn">X</button>
-                </Link>
-                {/* <button className="close-paper-btn" onClick={handleCloseClick}>X</button> */}
+                <button className="close-paper-btn" onClick={handleCloseClick}>X</button>
                 <div className='quiz-container'>
                     <input
                         type="text"

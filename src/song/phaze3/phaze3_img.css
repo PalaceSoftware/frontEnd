@@ -12,6 +12,8 @@
 .sinha3 {
     position: absolute;
     bottom: 0;
+    width: 40%;
+    height: auto;
     left: 410px;
     z-index: 3;
     opacity: 0;
@@ -39,6 +41,8 @@
 
 .king3_1 {
     position: absolute;
+    width: 44%;
+    height: auto;
     bottom: 0;
     right: -120px;
     z-index: 3;
@@ -48,6 +52,8 @@
 
 .king3_2 {
     position: absolute;
+    width: 50%;
+    height: auto;
     bottom: 0;
     right: 0;
     z-index: 3;

@@ -7,6 +7,7 @@ import '../song/phaze6/phaze6_explain.css'
 
 export default function Phaze6() {
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [imgsVisible, setImgsVisible] = useState(false);
     const [explainVisible, setExplainVisible] = useState([false, false, false, false]); // 각 explain이 보일 상태
     const [animationOn, setAnimationOn] = useState(false);
     const [changeBackground, setChangeBackground] = useState(false);
@@ -21,6 +22,9 @@ export default function Phaze6() {
     const navigate = useNavigate(); // For page navigation
 
     useEffect(() => {
+        setTimeout(() => {
+          setImgsVisible(true);
+        }, 1000);
         const handleScroll = (e) => {
 
           e.preventDefault();
@@ -45,10 +49,10 @@ export default function Phaze6() {
 
             setFogOpacity((prev) => {
               const newOpacity = Math.min(Math.max(prev + delta * 0.00005, 0), 1); // 0과 1 사이로 제한
-              const newMove = prev + delta * 0.1; // 스크롤에 따라 이동
+              const newMove = prev + delta * 0.01; // 스크롤에 따라 이동
     
               if(newMove <= 0) return 0;
-              if(newMove >= 1950) return 1950;
+              if(newMove >= 1950) return 1;
     
               return newOpacity;
             });
@@ -72,7 +76,10 @@ export default function Phaze6() {
           if(!changeBackground && scrollPosition > 0 && explainVisible.every(v => v === true) && !fogOff) {
             setAnimationOn(true);
             setChangeBackground(true);
-            setTimeout(() => setAnimationOn(false), 3000); // 2초 후 애니메이션 상태 해제
+            setFogOpacity(0);
+            setTimeout(() => {
+              setAnimationOn(false);
+            }, 3000); // 2초 후 애니메이션 상태 해제
           }
 
           if(changeBackground && fogOffset >= 9750) {
@@ -109,8 +116,8 @@ export default function Phaze6() {
                 <img src="/images/song/phaze6/background6_2.png" alt='background' 
                   className={`background6_2 ${changeBackground ? 'visible6' : ''}`}/>
             
-                <img src="/images/song/phaze6/palace6_1.png" className={`palace6_1 ${changeImgs ? 'hidden6' : ''}`}/>
-                <img src="/images/song/phaze6/palace6_2.png" 
+                <img src="/images/song/phaze6/palace6_1.png" className={`palace6_1 ${(imgsVisible && !changeImgs) ? 'visible6' : (imgsVisible && changeImgs) ? 'hidden6' : ''}`}/>
+                <img src="/images/song/phaze6/palace6_2.png"
                   className={`palace6_2 ${changeBackground ? 'visible6' : (changeImgs && fogOff) ? 'hidden6' : ''}`}/>
                 <img src="/images/song/phaze6/palace6_3.png" 
                   className={`palace6_3 ${changeImgs ? 'visible6' : ''}`}/>

@@ -11,7 +11,7 @@ import prevPage from './image/yunghwadang/previous_page.png';
 import closeBook from './image/yunghwadang/yunghwadang_close_book.png';
 import detail from './image/yunghwadang/yunghwadang_detail.png';
 import CaptureComponent from './capture1';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../Pages_kdh/ScrollDownPage.css';
 
 
@@ -335,6 +335,20 @@ export default function Yunghwadang() {
 
         };
     }, []);
+
+    const navigate = useNavigate();
+
+    const handleQuiz1Click = () => {
+        navigate('/quiz1', { state: { from: location.pathname + location.hash } });
+    };
+
+    const handleQuiz2Click = () => {
+        navigate('/quiz2', { state: { from: location.pathname + location.hash } });
+    };
+
+    const handleQuiz3Click = () => {
+        navigate('/quiz3', { state: { from: location.pathname + location.hash } });
+    };
 
     return (
         <div className='App'>
@@ -694,15 +708,30 @@ export default function Yunghwadang() {
                 <img src={process.env.PUBLIC_URL + '/cloud.png'} alt="cloud4" className="cloud4" />
                 <img src={process.env.PUBLIC_URL + '/crane.png'} alt="crane" className="crane" />
 
-                <Link to="/quiz1">
-                    <img src={process.env.PUBLIC_URL + '/quiz1-group.png'} alt="quiz1-group" className="quiz1-group" />
-                </Link>
-                <Link to="/quiz2">
-                    <img src={process.env.PUBLIC_URL + '/quiz2-group.png'} alt="quiz2-group" className="quiz2-group" />
-                </Link>
-                <Link to="/quiz3">
-                    <img src={process.env.PUBLIC_URL + '/quiz3-group.png'} alt="quiz3-group" className="quiz3-group" />
-                </Link>
+                <div>
+                    <img
+                        src={process.env.PUBLIC_URL + '/quiz1-group.png'}
+                        alt="quiz1-group"
+                        className="quiz1-group"
+                        onClick={handleQuiz1Click}
+                    />
+                </div>
+                <div>
+                    <img
+                        src={process.env.PUBLIC_URL + '/quiz2-group.png'}
+                        alt="quiz2-group"
+                        className="quiz2-group"
+                        onClick={handleQuiz2Click}
+                    />
+                </div>
+                <div>
+                    <img
+                        src={process.env.PUBLIC_URL + '/quiz3-group.png'}
+                        alt="quiz3-group"
+                        className="quiz3-group"
+                        onClick={handleQuiz3Click}
+                    />
+                </div>
             </div>
 
             <div id="photo-album" className="section" ref={photoRef}>

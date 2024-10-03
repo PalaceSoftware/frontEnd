@@ -19,15 +19,13 @@ export default function Phaze2() {
     const navigate = useNavigate(); // For page navigation
 
     useEffect(() => {
-        setTimeout(() => {
-            setBackgroundVisible(true);
-        }, 1000);
+      setTimeout(() => {
+        setBackgroundVisible(true);
+      }, 1000);
 
-        setTimeout(() => {
-            setImgsVisible(true);
-        }, 2000);
-
-
+      setTimeout(() => {
+          setImgsVisible(true);
+      }, 2000);
         const handleWheel = (e) => {
 
             e.preventDefault();
@@ -102,7 +100,7 @@ export default function Phaze2() {
             setRightPalaceZoomed(true); // right-palace 확대
             setTimeout(() => {
               navigate("/phaze3"); // Redirect to another page after zoom
-            }, 2000);
+            }, 3500);
           }
 
         };

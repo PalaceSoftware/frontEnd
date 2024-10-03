@@ -5,34 +5,33 @@
   top: 30%;
   left: 40%;
   opacity: 0;
-  transition: transform 1s ease-out, opacity 1.0s ease-out; /* 2초 동안 서서히 선명해짐 */
+  transition: opacity 1.0s ease-out; /* 2초 동안 서서히 선명해짐 */
 }
 
 .zeolites5 {
   position: absolute;
+  width: 100%;
+  height: auto;
   z-index: 2;
   opacity: 0;
   transform: translateY(20px); /* 살짝 아래에서 시작 */
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-  top: 0;
+  bottom: 0;
   left: 0;
 }
 
-.sinha5_1, .sinha5_2 {
+.sinha5{
   position: absolute;
+  width: 40%;
+  height: auto;
   z-index: 3;
   opacity: 0;
+  left: 500px;
   transform: translateY(20px); /* 살짝 아래에서 시작 */
-  top: 400px;
-  transition: opacity 1s ease-in-out,transform 1s ease-in-out;
+  top: 250px;
+  transition: opacity 1s ease-in-out;
 }
 
-.sinha5_1 {
-  left: 650px;
-}
-.sinha5_2 {
-  right: 650px;
-}
 
 .fade-in-up {
   opacity: 1;

@@ -1,8 +1,10 @@
 
 .palace4 {
     position: absolute;
+    width: 55%;
+    height: auto;
     z-index: 2;
-    top: 0;
+    bottom: 0;
     left: 0;
     opacity: 0;
     transition: opacity 1.5s ease-out;
@@ -10,6 +12,8 @@
 
 .wall4 {
     position: absolute;
+    width: 100%;
+    height: auto;
     z-index: 1;
     left: 0;
     bottom: 0;
@@ -19,6 +23,8 @@
 
 .land4 {
     position: absolute;
+    width: 100%;
+    height: auto;
     z-index: 2;
     left: 0;
     bottom: 0;
@@ -28,6 +34,8 @@
 
 .fog4_1, .fog4_2{
     position: absolute;
+    width: 100%;
+    height: auto;
     z-index: 3;
     left: 0;
     bottom: 0;

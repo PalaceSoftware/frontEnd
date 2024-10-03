@@ -3,7 +3,7 @@
   position: absolute;
   opacity: 0;
   z-index: 5;
-  animation-fill-mode: forwards; /* 애니메이션 후 상태를 유지 */
+  transition: opacity 0s ease-in-out;
 }
 
 .explain5_1 {

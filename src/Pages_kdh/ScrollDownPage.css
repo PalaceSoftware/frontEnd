@@ -5,10 +5,10 @@ html {
 .App {
     width: 1710px;
     height: 1069px;
-    /* overflow-y: scroll; */
-    scroll-behavior: auto;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
-    /* 스크롤할 때 섹션이 뷰포트에 맞춰지도록 설정 */
+    position: relative;
 }
 
 .section {
@@ -23,7 +23,6 @@ html {
     background-position: center;
     background-repeat: no-repeat;
     scroll-snap-align: start;
-    /* 섹션의 시작 부분에서 스크롤이 멈추도록 설정 */
     scroll-snap-stop: always;
     overflow-x: hidden;
 }
@@ -625,6 +624,7 @@ html {
     /* 이미지가 가운데 위치하도록 설정 */
     background-repeat: no-repeat;
     /* 이미지 반복을 방지 */
+    background-attachment: fixed; /* 배경을 고정 */
 }
 
 .solo-appear {

@@ -73,19 +73,19 @@
   
   /* 이미지의 회전 각도 및 간격 조절 */
   .image:nth-child(1) { 
-    transform: rotateY(0deg) translateZ(500px); /* rotateZ로 이미지 자체의 회전 추가 */ 
+    transform: rotateY(0deg) translateZ(500px) rotateY(0deg); /* 정면 */ /* rotateZ로 이미지 자체의 회전 추가 */ 
   }
   .image:nth-child(2) { 
-    transform: rotateY(72deg) translateZ(500px); /* Z축 회전을 추가해 이미지 자체를 회전시킴 */
+    transform: rotateY(72deg) translateZ(500px) rotateY(-72deg); /* Z축 회전을 추가해 이미지 자체를 회전시킴 */
   }
   .image:nth-child(3) { 
-    transform: rotateY(144deg) translateZ(500px); 
+    transform: rotateY(144deg) translateZ(500px) rotateY(-144deg);
   }
   .image:nth-child(4) { 
-    transform: rotateY(216deg) translateZ(500px); 
+    transform: rotateY(216deg) translateZ(500px) rotateY(-216deg);
   }
   .image:nth-child(5) { 
-    transform: rotateY(288deg) translateZ(500px); 
+    transform: rotateY(288deg) translateZ(500px) rotateY(-288deg);
   }
   
 

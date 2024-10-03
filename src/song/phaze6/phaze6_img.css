@@ -1,16 +1,22 @@
 .palace6_1 {
     position: absolute;
     z-index: 2;
-    top: 0;
+    width: 100%;
+    height: auto;
+    bottom: 0;
     left: 0;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
 }
 
 .palace6_2 {
     position: absolute;
     z-index: 3;
     opacity: 0;
-    top: 0;
-    left: 0;
+    width: 100%;
+    height: auto;
+    bottom: -5px;    
+    left: -8px;
     transition: opacity 2s ease-in-out;
   }
 .palace6_2.hidden6 {
@@ -21,7 +27,9 @@
   position: absolute;
   z-index: 4;
   opacity: 0;
-  top: 0;
+  width: 100%;
+  height: auto;
+  bottom: 0;
   left: 0;
 }
 
@@ -29,7 +37,6 @@
   position: absolute;
   z-index: 6;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
 }
 
 .fog6_1 {
@@ -124,11 +131,9 @@
 }
 
 .move_bottom6 {
-  opacity: 0.4;
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
   animation: move_down 2s ease-in-out;
   animation-fill-mode: forwards; /* 애니메이션 후 상태를 유지 */
-
 }
 
 @keyframes move_down {
@@ -136,8 +141,8 @@
     opacity: 1;
   }
   to {
-    opacity: 0.3;
-    bottom: -500px;
+    opacity: 0.5;
+    bottom: -475px;
     z-index: 4;
   }
 }

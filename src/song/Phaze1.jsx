@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import "../song/phaze1/phaze1_base.css";
 import "../song/phaze1/phaze1_img.css";
 import "../song/phaze1/phaze1_img2.css";
@@ -93,9 +92,9 @@ export default function Phaze1() {
         setTimeout(() => {
           setDoorsOpen1(true);
         }, 1000);
-      } else if (greenDoor1Open && !adjustView) {
+      } else if (greenDoor1Open && !adjustView && scrollPosition >= 3500) {
         setAdjustView(true);
-        setScrollPosition(3000);
+        setScrollPosition(3500);
       } else if (newPosition >= 4500 && !greenDoor2Open) {
         setScrollPosition(4500);
         setTimeout(() => {
@@ -164,12 +163,13 @@ export default function Phaze1() {
             <div className="background-image"> 
               <img src="images/song/phaze1/background1_1.jpg"/>
             </div>
-            
+            <img src="images/song/phaze1/explain1.png"
+                className="explain1"/>
             <img src="images/song/phaze1/mountain/mountain1_1.png" 
                 className={`mountain1_1 ${changeVisible1 ? "visible1_1" : ""}`}/>
             <img src="images/song/phaze1/mountain/mountain1_3.png" 
-                style={{ opacity: 1- mountainOpcity }} // mountain1_2의 opacity 조절
-                className={`mountain1_3 ${changeVisible1 ? "visible1_1" : ""}`}/>
+                className={`mountain1_3 ${changeVisible1 ? "visible1_1" : ""}`}
+                />
             <img src="images/song/phaze1/mountain/sun1.png" 
                 className={`sun1 ${changeVisible1 ? "visible1_1" : ""}`}/>
             <img src="images/song/phaze1/mountain/moon1.png" 

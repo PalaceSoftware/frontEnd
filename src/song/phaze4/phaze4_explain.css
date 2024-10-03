@@ -1,11 +1,15 @@
 .explain4_1, .explain4_2, .explain4_3, .explain4_4, .explain4_5 {
     position: absolute;
+    width: 5.5%;
+    height: auto;
     opacity: 0;
     z-index: 4;
     animation-fill-mode: forwards; /* 애니메이션 후 상태를 유지 */
 }
 
 .explain4_1 {
+    width: 6.5%;
+    height: auto;
     top: 300px;
     right: 580px;
 }
@@ -26,7 +30,7 @@
 }
 
 .explain4_5 {
-    top: 310px;
+    top: 300px;
     right: 100px;
 }
 
