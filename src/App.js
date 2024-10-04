@@ -2,6 +2,12 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 
+
+import Role from "./test/Role";
+
+
+import Start from "./Start";
+
 import Test2 from "./test/Test2";
 import Test3 from "./test/Test3";
 import Map from "./map/map";
@@ -50,12 +56,13 @@ function App() {
     <div>
       <Router>
         <Routes>
+          <Route path='/start' element={<Start />} />
           <Route path='/map' element={<Map />} />
           <Route path='/nakseonjae/changhoji' element={<Changhoji />} />
           <Route path='*' element={
             <Layout>
               <Routes>
-              <Route path="/" element={<RedirectToPhaze1 />} />
+                <Route path="/" element={<RedirectToPhaze1 />} />
                 <Route path='/test2' element={<Test2 />} />
                 <Route path='/test3' element={<Test3 />} />
                 <Route path='/phaze1' element={<Phaze1 />} />

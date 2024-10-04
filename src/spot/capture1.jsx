@@ -29,6 +29,7 @@ export default function CaptureComponent({ handleBackgroundChange }) {
     const audioRef = useRef(new Audio(audioFile)); 
     // const otherAudioRef = useRef(new Audio(process.env.PUBLIC_URL + '/music/detail-music.mp3'));
 
+
     const handleMapClick = () => {       
         navigate('/map');
     };

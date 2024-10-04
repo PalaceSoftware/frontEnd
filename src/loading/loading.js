@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import background from './assets/background.png';
 import character1 from './assets/character1.png';
@@ -83,120 +83,148 @@ export default function Loading() {
         };
     }, []);
 
+    const musicRef = useRef(null);
+
+    useEffect(() => {
+        const music = musicRef.current;
+
+        if (music) {
+            // 음소거 상태에서 음악을 자동 재생
+            music.muted = true;
+            music.play().then(() => {
+                // 재생이 시작된 후 짧은 지연 시간 후 음소거 해제
+                setTimeout(() => {
+                    music.muted = false;
+                }, 1000);
+            }).catch((error) => {
+                console.log('Autoplay was prevented:', error);
+            });
+        }
+
+        return () => {
+            if (music) {
+                music.pause();
+            }
+        };
+    }, []);
+
     return (
-        <div style={{ position: 'relative', height: '1069px', width: '1710px', overflow: 'hidden' }}>
-            <img
-                src={background}
-                alt="Background"
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
-            />
-            <img
-                src={character1}
-                alt="Character"
-                style={{
-                    position: 'absolute',
-                    top: '530px',
-                    left: `${characterPosition}vw`,
-                    width: '250px',
-                    zIndex: 6,
-                    transition: 'left 0.03s',
-                }}
-            />
-            <img
-                src={character2}
-                alt="Character"
-                style={{
-                    position: 'absolute',
-                    top: '280px',
-                    left: `${characterPosition1}vw`,
-                    width: '250px',
-                    zIndex: 5,
-                    transition: 'left 0.03s',
-                }}
-            />
-            <img
-                src={character3}
-                alt="Character"
-                style={{
-                    position: 'absolute',
-                    top: '80px',
-                    left: `${characterPosition + 20}vw`,
-                    width: '250px',
-                    zIndex: 4,
-                    transition: 'left 0.03s',
-                }}
-            />
-            
-            <img
-                src={character4}
-                alt="Character"
-                style={{
-                    position: 'absolute',
-                    top: '40px',
-                    left: `${characterPosition1 + 20}vw`,
-                    width: '250px',
-                    zIndex: 3,
-                    transition: 'left 0.03s',
-                }}
-            />
-            {effectVisible && (
-                <>
-                <div
+        <div>
+            <audio ref={musicRef} src={process.env.PUBLIC_URL + '/music/map-music.mp3'} loop />
+            <div style={{ position: 'relative', height: '1069px', width: '1710px', overflow: 'hidden' }}>
+                <img
+                    src={background}
+                    alt="Background"
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
+                />
+                <img
+                    src={character1}
+                    alt="Character"
                     style={{
                         position: 'absolute',
-                        top: '250px',
-                        left: '530px',
-                        width: '1400px',
-                        height: '100%', 
-                        backgroundImage: `url(${effect1})`,
-                        clipPath: `polygon(100% 0%, 100% 100%, ${clipValue}% 100%, ${clipValue}% 0%)`,
-                        zIndex: 2,
-                        transition: 'clip-path 0.1s linear',
+                        top: '530px',
+                        left: `${characterPosition}vw`,
+                        width: '250px',
+                        zIndex: 6,
+                        transition: 'left 0.03s',
                     }}
                 />
-                <div
+                <img
+                    src={character2}
+                    alt="Character"
                     style={{
                         position: 'absolute',
-                        top: '200px',
-                        left: '830px',
-                        width: '1400px',
-                        height: '100%', 
-                        backgroundImage: `url(${effect3})`,
-                        clipPath: `polygon(100% 0%, 100% 50%, ${clipValue}% 50%, ${clipValue}% 0%)`,
-                        zIndex: 2,
-                        transition: 'clip-path 0.1s linear',
+                        top: '280px',
+                        left: `${characterPosition1}vw`,
+                        width: '250px',
+                        zIndex: 5,
+                        transition: 'left 0.03s',
                     }}
                 />
-                <div
+                <img
+                    src={character3}
+                    alt="Character"
                     style={{
                         position: 'absolute',
-                        top: '200px',
-                        left: '00px',
-                        width: '1000px',
-                        height: '100%', 
-                        backgroundImage: `url(${effect2})`,
-                        clipPath: `polygon(${clipValue1}% 0%, ${clipValue1}% 100%, 0% 100%, 0% 0%)`,
-                        zIndex: 2,
-                        transition: 'clip-path 0.1s linear',
+                        top: '80px',
+                        left: `${characterPosition + 20}vw`,
+                        width: '250px',
+                        zIndex: 4,
+                        transition: 'left 0.03s',
                     }}
                 />
-                <div
+
+                <img
+                    src={character4}
+                    alt="Character"
                     style={{
                         position: 'absolute',
-                        top: '100px',
-                        left: '350px',
-                        width: '1000px',
-                        height: '100%', 
-                        backgroundImage: `url(${effect4})`,
-                        clipPath: `polygon(${clipValue1}% 0%, ${clipValue1}% 50%, 0% 50%, 0% 0%)`,
-                        zIndex: 2,
-                        transition: 'clip-path 0.1s linear',
+                        top: '40px',
+                        left: `${characterPosition1 + 20}vw`,
+                        width: '250px',
+                        zIndex: 3,
+                        transition: 'left 0.03s',
                     }}
                 />
-                </>
-            )}
-            
-            
+                {effectVisible && (
+                    <>
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: '250px',
+                                left: '530px',
+                                width: '1400px',
+                                height: '100%',
+                                backgroundImage: `url(${effect1})`,
+                                clipPath: `polygon(100% 0%, 100% 100%, ${clipValue}% 100%, ${clipValue}% 0%)`,
+                                zIndex: 2,
+                                transition: 'clip-path 0.1s linear',
+                            }}
+                        />
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: '200px',
+                                left: '830px',
+                                width: '1400px',
+                                height: '100%',
+                                backgroundImage: `url(${effect3})`,
+                                clipPath: `polygon(100% 0%, 100% 50%, ${clipValue}% 50%, ${clipValue}% 0%)`,
+                                zIndex: 2,
+                                transition: 'clip-path 0.1s linear',
+                            }}
+                        />
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: '200px',
+                                left: '00px',
+                                width: '1000px',
+                                height: '100%',
+                                backgroundImage: `url(${effect2})`,
+                                clipPath: `polygon(${clipValue1}% 0%, ${clipValue1}% 100%, 0% 100%, 0% 0%)`,
+                                zIndex: 2,
+                                transition: 'clip-path 0.1s linear',
+                            }}
+                        />
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: '100px',
+                                left: '350px',
+                                width: '1000px',
+                                height: '100%',
+                                backgroundImage: `url(${effect4})`,
+                                clipPath: `polygon(${clipValue1}% 0%, ${clipValue1}% 50%, 0% 50%, 0% 0%)`,
+                                zIndex: 2,
+                                transition: 'clip-path 0.1s linear',
+                            }}
+                        />
+                    </>
+                )}
+
+
+            </div>
         </div>
     );
 }
