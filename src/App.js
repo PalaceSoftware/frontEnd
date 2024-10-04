@@ -53,7 +53,7 @@ function App() {
     localStorage.removeItem('capturedPages');
   }, []);
   return (
-    <div className="App">
+    <div>
       <Router>
         <Routes>
           <Route path='/start' element={<Start />} />
