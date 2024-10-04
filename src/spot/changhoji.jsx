@@ -116,182 +116,210 @@ export default function Changhoji() {
         navigate('/nakseonjae');
     };
 
-    return (
-        <div className='custom-cursor-changhoji'>
-            <div className="changhoji" style={{ height: '5270px', position: 'relative', overflow: 'hidden', width: '1710px' }}>
-                <img
-                    src={changhojiImages[currentImageIndex]}
-                    alt="창호지"
-                    style={{
-                        width: '1710px',
-                        height: '1069px',
-                        position: 'fixed',
-                        top: '0%',
-                        left: '0%',
-                        zIndex: -1,
-                    }}
-                />
-                <img src={backToNakseonjae} alt="낙선재로 돌아가기" style={{ position: 'fixed', width: '30px', top: '50px', left: '1620px', zIndex: 1, }} onClick={handleBackToNakseonjae}/>
-                {currentImageIndex === changhojiImages.length - 1 && (
-                    <>
-                        {candleIndex === 0 ? (
-                            <img
-                                src={candle1}
-                                alt="Candle 1"
-                                onClick={handleCandleClick}
-                                style={{
-                                    position: 'absolute',
-                                    top: '4750px',
-                                    left: '855px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 1,
-                                    cursor: 'pointer',
-                                }}
-                            />
-                        ) : (
-                            <img
-                                src={candle2}
-                                alt="Candle 2"
-                                onClick={handleCandleClick}
-                                style={{
-                                    position: 'absolute',
-                                    top: '4748px',
-                                    left: '865px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 1,
-                                    cursor: 'pointer',
-                                }}
-                            />
-                        )}
-                        {fireIndex === 0 && (
-                            <img
-                                src={fire1}
-                                alt="Fire 1"
-                                style={{
-                                    position: 'absolute',
-                                    top: '4623px',
-                                    left: '855px',
-                                    width: '350px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 0,
-                                }}
-                            />
-                        )}
-                        {(fireIndex === 1 || fireIndex === 9) && (
-                            <img
-                                src={fire2}
-                                alt="Fire 2"
-                                style={{
-                                    position: 'absolute',
-                                    top: '4623px',
-                                    left: '858px',
-                                    width: '350px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 0,
-                                }}
-                            />
-                        )}
-                        {(fireIndex === 2 || fireIndex === 8) && (
-                            <img
-                                src={fire3}
-                                alt="Fire 3"
-                                style={{
-                                    position: 'absolute',
-                                    top: '4623px',
-                                    left: '853px',
-                                    width: '350px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 0,
-                                }}
-                            />
-                        )}
-                        {(fireIndex === 3 || fireIndex === 7) && (
-                            <img
-                                src={fire4}
-                                alt="Fire 4"
-                                style={{
-                                    position: 'absolute',
-                                    top: '4623px',
-                                    left: '858px',
-                                    width: '350px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 0,
-                                }}
-                            />
-                        )}
-                        {(fireIndex === 4 || fireIndex === 6) && (
-                            <img
-                                src={fire5}
-                                alt="Fire 5"
-                                style={{
-                                    position: 'absolute',
-                                    top: '4623px',
-                                    left: '855px',
-                                    width: '350px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 0,
-                                }}
-                            />
-                        )}
-                        {fireIndex === 5 && (
-                            <img
-                                src={fire6}
-                                alt="Fire 6"
-                                style={{
-                                    position: 'absolute',
-                                    top: '4623px',
-                                    left: '845px',
-                                    width: '350px',
-                                    transform: 'translate(-50%, -50%)',
-                                    zIndex: 0,
-                                }}
-                            />
-                        )}
+    const musicRef = useRef(null);
 
-                        {showBook && (
-                            <>
+    useEffect(() => {
+        const music = musicRef.current;
+
+        if (music) {
+            // 음소거 상태에서 음악을 자동 재생
+            music.muted = true;
+            music.play().then(() => {
+                // 재생이 시작된 후 짧은 지연 시간 후 음소거 해제
+                setTimeout(() => {
+                    music.muted = false;
+                }, 1000);
+            }).catch((error) => {
+                console.log('Autoplay was prevented:', error);
+            });
+        }
+
+        return () => {
+            if (music) {
+                music.pause();
+            }
+        };
+    }, []);
+
+    return (
+        <div>
+            <audio ref={musicRef} src={process.env.PUBLIC_URL + '/music/map-music.mp3'} loop />
+            <div className='custom-cursor-changhoji'>
+                <div className="changhoji" style={{ height: '5270px', position: 'relative', overflow: 'hidden', width: '1710px' }}>
+                    <img
+                        src={changhojiImages[currentImageIndex]}
+                        alt="창호지"
+                        style={{
+                            width: '1710px',
+                            height: '1069px',
+                            position: 'fixed',
+                            top: '0%',
+                            left: '0%',
+                            zIndex: -1,
+                        }}
+                    />
+                    <img src={backToNakseonjae} alt="낙선재로 돌아가기" style={{ position: 'fixed', width: '30px', top: '50px', left: '1620px', zIndex: 1, }} onClick={handleBackToNakseonjae} />
+                    {currentImageIndex === changhojiImages.length - 1 && (
+                        <>
+                            {candleIndex === 0 ? (
                                 <img
-                                    src={book1}
-                                    alt="Book 1"
-                                    style={{ position: 'absolute', top: '4750px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}
+                                    src={candle1}
+                                    alt="Candle 1"
+                                    onClick={handleCandleClick}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4750px',
+                                        left: '855px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 1,
+                                        cursor: 'pointer',
+                                    }}
                                 />
+                            ) : (
                                 <img
-                                    src={nextPage}
-                                    alt="Next Page"
-                                    onClick={handleNextPageClick}
-                                    style={{ position: 'absolute', top: '5030px', left: '1250px', transform: 'translate(-50%, -50%)', zIndex: 4, cursor: 'pointer' }}
+                                    src={candle2}
+                                    alt="Candle 2"
+                                    onClick={handleCandleClick}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4748px',
+                                        left: '865px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 1,
+                                        cursor: 'pointer',
+                                    }}
                                 />
+                            )}
+                            {fireIndex === 0 && (
                                 <img
-                                    src={closeBook}
-                                    alt="Close Book"
-                                    onClick={handleCloseBookClick}
-                                    style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    src={fire1}
+                                    alt="Fire 1"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4623px',
+                                        left: '855px',
+                                        width: '350px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 0,
+                                    }}
                                 />
-                            </>
-                        )}
-                        {showBook2 && (
-                            <>
+                            )}
+                            {(fireIndex === 1 || fireIndex === 9) && (
                                 <img
-                                    src={book2}
-                                    alt="Book 2"
-                                    style={{ position: 'absolute', top: '4750px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}
+                                    src={fire2}
+                                    alt="Fire 2"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4623px',
+                                        left: '858px',
+                                        width: '350px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 0,
+                                    }}
                                 />
+                            )}
+                            {(fireIndex === 2 || fireIndex === 8) && (
                                 <img
-                                    src={prevPage}
-                                    alt="Previous Page"
-                                    onClick={handlePrevPageClick}
-                                    style={{ position: 'absolute', top: '5030px', left: '450px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    src={fire3}
+                                    alt="Fire 3"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4623px',
+                                        left: '853px',
+                                        width: '350px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 0,
+                                    }}
                                 />
+                            )}
+                            {(fireIndex === 3 || fireIndex === 7) && (
                                 <img
-                                    src={closeBook}
-                                    alt="Close Book"
-                                    onClick={handleCloseBookClick}
-                                    style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    src={fire4}
+                                    alt="Fire 4"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4623px',
+                                        left: '858px',
+                                        width: '350px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 0,
+                                    }}
                                 />
-                            </>
-                        )}
-                    </>
-                )}
+                            )}
+                            {(fireIndex === 4 || fireIndex === 6) && (
+                                <img
+                                    src={fire5}
+                                    alt="Fire 5"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4623px',
+                                        left: '855px',
+                                        width: '350px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 0,
+                                    }}
+                                />
+                            )}
+                            {fireIndex === 5 && (
+                                <img
+                                    src={fire6}
+                                    alt="Fire 6"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '4623px',
+                                        left: '845px',
+                                        width: '350px',
+                                        transform: 'translate(-50%, -50%)',
+                                        zIndex: 0,
+                                    }}
+                                />
+                            )}
+
+                            {showBook && (
+                                <>
+                                    <img
+                                        src={book1}
+                                        alt="Book 1"
+                                        style={{ position: 'absolute', top: '4750px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}
+                                    />
+                                    <img
+                                        src={nextPage}
+                                        alt="Next Page"
+                                        onClick={handleNextPageClick}
+                                        style={{ position: 'absolute', top: '5030px', left: '1250px', transform: 'translate(-50%, -50%)', zIndex: 4, cursor: 'pointer' }}
+                                    />
+                                    <img
+                                        src={closeBook}
+                                        alt="Close Book"
+                                        onClick={handleCloseBookClick}
+                                        style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    />
+                                </>
+                            )}
+                            {showBook2 && (
+                                <>
+                                    <img
+                                        src={book2}
+                                        alt="Book 2"
+                                        style={{ position: 'absolute', top: '4750px', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}
+                                    />
+                                    <img
+                                        src={prevPage}
+                                        alt="Previous Page"
+                                        onClick={handlePrevPageClick}
+                                        style={{ position: 'absolute', top: '5030px', left: '450px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    />
+                                    <img
+                                        src={closeBook}
+                                        alt="Close Book"
+                                        onClick={handleCloseBookClick}
+                                        style={{ position: 'absolute', top: '4450px', left: '1330px', transform: 'translate(-50%, -50%)', zIndex: 3, cursor: 'pointer' }}
+                                    />
+                                </>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
