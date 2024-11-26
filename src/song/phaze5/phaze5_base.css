@@ -1,8 +1,7 @@
 .fifth-page {
   position: absolute;
   width: 1710px;
-  height: 1069px;
-  display: flex;
+    height: 1069px;
   overflow: hidden;
 }
 
@@ -15,6 +14,8 @@
 }
 
 .background5_1 {
+  top: 0;
+  left: 0;
   position: absolute;
   width: 100%;
   height: auto;

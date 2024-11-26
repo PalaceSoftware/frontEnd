@@ -21,6 +21,20 @@ export default function Phaze3() {
 
   const navigate = useNavigate(); // For page navigation
 
+  const [hover, setHover] = useState(false);
+
+  const handleClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+    const halfHeight = rect.height / 2;
+
+    if (clickY < halfHeight) {
+      navigate("/phaze4"); // 상단 클릭 시 이동할 URL
+    } else {
+      navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+    }
+  };
+  
   useEffect(() => {
 
     setTimeout(() => {
@@ -169,8 +183,6 @@ export default function Phaze3() {
             style={{ transform: `translateX(${-movingPoint}px)` }} />
           <img src="/images/song/phaze3/king3_1.png" className={`king3_1 ${imgsVisible ? 'visible3_2' : ''}`}
             style={{ transform: `translateX(${-movingPoint}px)` }} />
-
-
           <img src="/images/song/phaze3/explain3/explain3_5.png"
             className={`explain3_5 ${explain2Visible[0] ? 'slideIn3' : ''}`} />
           <img src="/images/song/phaze3/explain3/explain3_6.png"
@@ -187,9 +199,18 @@ export default function Phaze3() {
           <img src="/images/song/phaze3/king3_2.png"
             className={`king3_2 ${imgs2Visible ? 'visible3_2' : ''}`} />
 
-          {blinkWindow && <div className="blink"></div>}
+                {blinkWindow && <div className="blink"></div>}
+
+                <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
+            </div>
         </div>
       </div>
-    </div>
   );
 }

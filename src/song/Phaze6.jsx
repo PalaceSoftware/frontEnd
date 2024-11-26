@@ -20,7 +20,19 @@ export default function Phaze6() {
   const [finalBackground, setFinalBackground] = useState(false); // fog 이미지의 이동값
 
   const navigate = useNavigate(); // For page navigation
+  const [hover, setHover] = useState(false);
 
+  const handleClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+    const halfHeight = rect.height / 2;
+
+    if (clickY < halfHeight) {
+      navigate("/phaze7"); // 상단 클릭 시 이동할 URL
+    } else {
+      navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+    }
+  };
   useEffect(() => {
     setTimeout(() => {
       setImgsVisible(true);
@@ -131,6 +143,7 @@ export default function Phaze6() {
         music.pause();
       }
     };
+    
   }, []);
 
   return (
@@ -171,8 +184,18 @@ export default function Phaze6() {
 
           <img src="/images/song/phaze6/background6_3.png" alt='background' className={`background6_3 ${finalBackground ? 'next_page6' : ''}`} />
 
+                <img src="/images/song/phaze6/background6_3.png" alt='background' className={`background6_3 ${finalBackground ? 'next_page6' : ''}`}/>
+
+                <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
+            </div>
         </div>
       </div>
-    </div>
   );
 }

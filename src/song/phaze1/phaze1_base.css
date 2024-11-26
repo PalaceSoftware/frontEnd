@@ -6,7 +6,6 @@
     height: 1069px;
     perspective: 2000px;
     perspective-origin: center center;
-    margin: auto;
     overflow: hidden; /* 초과된 부분을 숨김 */
 }
   
@@ -66,8 +65,8 @@
 }
 
 .background-image img {
-    width: 1710px;  /* 고정된 크기로 설정 */
-    height: 1069px; /* 고정된 크기로 설정 */
+    width: 1710px;
+    height: 1069px;
     object-fit: cover; /* 이미지 비율 유지 */
 }
 

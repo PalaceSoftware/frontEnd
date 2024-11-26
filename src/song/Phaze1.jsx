@@ -22,10 +22,10 @@ export default function Phaze1() {
   const [moveSunMoon, setMoveSunMoon] = useState(0);
   const [mountainOpcity, setMountainOpacity] = useState(0);
 
-
   const navigate = useNavigate(); // For page navigatio
 
-
+  const [hover, setHover] = useState(false);
+  
   useEffect(() => {
     // 처음 화면이 시작되면 1초 대기 후 first door가 열리도록 함
     setTimeout(() => {
@@ -42,8 +42,10 @@ export default function Phaze1() {
       if (animationOn) {
         setMoveSunMoon((prev) => {
           // Sun과 Moon의 위치 변경
-          const newMove = prev + delta * 0.1; // 스크롤에 따라 이동
-          if (newMove <= 0) return 0;
+
+          const newMove = prev + delta * 0.2; // 스크롤에 따라 이동
+          if(newMove <= 0) return 0;
+
           const sunPosition = Math.min(newMove, 1261); // Sun의 최대 이동 거리
           const moonPosition = Math.max(-newMove, -1261); // Moon의 최소 이동 거리
 
@@ -132,15 +134,24 @@ export default function Phaze1() {
     }, 2000);
   };
 
-  const musicRef = useRef(null);
+  const handleClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+    const halfHeight = rect.height / 2;
 
+    if (clickY < halfHeight) {
+      navigate("/phaze2"); // 상단 클릭 시 이동할 URL
+    } else {
+      navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+    }
+  };
+
+  const musicRef = useRef(null);
 
   useEffect(() => {
     const music = musicRef.current;
 
-    if (music) {
-      // 음소거 상태에서 음악을 자동 재생
-      music.muted = true;
+    return () => {
       music.play().then(() => {
         // 재생이 시작된 후 짧은 지연 시간 후 음소거 해제
         setTimeout(() => {
@@ -149,12 +160,6 @@ export default function Phaze1() {
       }).catch((error) => {
         console.log('Autoplay was prevented:', error);
       });
-    }
-
-    return () => {
-      if (music) {
-        music.pause();
-      }
     };
   }, []);
 
@@ -277,6 +282,14 @@ export default function Phaze1() {
           </div>
         </div>
       </div>
+      <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
     </div>
   );
 }

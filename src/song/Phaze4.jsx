@@ -14,6 +14,8 @@ export default function Phaze4() {
 
   const navigate = useNavigate(); // For page navigation
 
+  const [hover, setHover] = useState(false);
+
   useEffect(() => {
 
     setTimeout(() => {
@@ -67,6 +69,18 @@ export default function Phaze4() {
     };
   }, [scrollPosition, explainVisible, changeBackground]);
 
+  const handleClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+    const halfHeight = rect.height / 2;
+
+    if (clickY < halfHeight) {
+      navigate("/phaze5"); // 상단 클릭 시 이동할 URL
+    } else {
+      navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+    }
+  };
+
   const musicRef = useRef(null);
 
   useEffect(() => {
@@ -99,12 +113,12 @@ export default function Phaze4() {
         <div className={'content4'}>
           <img src="/images/song/phaze4/background4.png" alt='background'
             className={`background4_1 ${backgroundVisible ? 'visible4_1' : ''}`} />
-
           <img src="/images/song/phaze4/palace4.png" className={`palace4 ${imgsVisible ? 'visible4_2' : ''}`} />
           <img src="/images/song/phaze4/fog4_1.png" className={`fog4_1 ${imgsVisible ? 'visible4_2' : ''}`} />
           <img src="/images/song/phaze4/fog4_2.png" className={`fog4_2 ${imgsVisible ? 'visible4_2' : ''}`} />
           <img src="/images/song/phaze4/land4.png" className={`land4 ${imgsVisible ? 'visible4_2' : ''}`} />
           <img src="/images/song/phaze4/wall4.png" className={`wall4 ${imgsVisible ? 'visible4_2' : ''}`} />
+
 
 
           <img src="/images/song/phaze4/explain4_1.png" className={`explain4_1 ${explainVisible[0] ? 'slideIn4' : ''}`} />
@@ -115,8 +129,16 @@ export default function Phaze4() {
 
           <img src="/images/song/phaze5/background5.png" className={`background4_2 ${changeBackground ? 'visible4_1' : ''}`} />
 
+                <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
+            </div>
         </div>
       </div>
-    </div>
   );
 }

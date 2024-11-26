@@ -19,7 +19,20 @@ export default function Phaze5() {
 
   const navigate = useNavigate(); // For page navigation
 
+    const [hover, setHover] = useState(false);
 
+    const handleClick = (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+      const halfHeight = rect.height / 2;
+  
+      if (clickY < halfHeight) {
+        navigate("/phaze6"); // 상단 클릭 시 이동할 URL
+      } else {
+        navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+      }
+    };
+    
   useEffect(() => {
 
     setTimeout(() => {
@@ -179,8 +192,17 @@ export default function Phaze5() {
           <img src="/images/song/phaze6/background6_1.png"
             className={`next_background ${nextBackground ? 'showNext' : ''}`}
           />
+          <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
         </div>
       </div>
+      
     </div>
   );
 }

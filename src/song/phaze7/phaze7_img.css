@@ -2,8 +2,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1710px; /* 이미지 회전 영역의 넓이 */
-    height: 1069px; /* 이미지 회전 영역의 높이 */
+    width: 1710px;
+    height: 1069px;
     margin: 100px auto;
     perspective: 1200px; /* 3D 효과를 위한 원근감 */
     opacity: 0;
@@ -88,8 +88,6 @@
     transform: rotateY(288deg) translateZ(500px) rotateY(-288deg);
   }
   
-
-
   .cloud1_1 {
     position: absolute;
     top: 0;
@@ -237,7 +235,7 @@
   top: 0px;
   left: -500px;
   width: auto;
-  height: 1069px;
+    height: 1069px;
   z-index: 12;
   opacity: 0;
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
@@ -364,3 +362,23 @@
     opacity: 1;
   }
 }
+
+  /* 기본 스타일 */
+  .floating-image2 {
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    width: 100px;
+    height: 200px;
+    transition: transform 0.5s ease, right 0.5s ease;
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  /* Hover 상태 */
+  .floating-image2.hover {
+    width: 250px;
+    height: 150px;
+    bottom: 70px;
+    transform: translateX(-30px); /* 왼쪽으로 이동 */
+  }

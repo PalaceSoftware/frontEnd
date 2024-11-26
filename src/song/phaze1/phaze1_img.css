@@ -185,3 +185,24 @@
   bottom: 100px;
   left: 450px;
 }
+
+
+  /* 기본 스타일 */
+  .floating-image2 {
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    width: 100px;
+    height: 200px;
+    transition: transform 0.5s ease, right 0.5s ease;
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  /* Hover 상태 */
+  .floating-image2.hover {
+    width: 250px;
+    height: 150px;
+    bottom: 70px;
+    transform: translateX(-30px); /* 왼쪽으로 이동 */
+  }
