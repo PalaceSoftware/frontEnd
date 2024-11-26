@@ -3,8 +3,8 @@ html {
 }
 
 .App {
-    width: 1910px;
-    height: 1150px;
+    width: 1710px;
+    height: 1069px;
     overflow-y: scroll;
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;

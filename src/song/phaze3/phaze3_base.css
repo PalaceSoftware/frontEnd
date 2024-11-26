@@ -1,7 +1,7 @@
 .third-page {
     position: absolute;
-    width: 1838px;
-    height: 1150px;
+    width: 1710px;
+    height: 1069px;
     display: flex;
     background-color: rgb(33, 34, 44);
     overflow: hidden;
@@ -33,8 +33,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 1838px;
-    height: 1150px;
+    width: 1710px;
+    height: 1069px;
     z-index: 9999; /* 다른 요소들 위로 올라오게 설정 */
 }
 

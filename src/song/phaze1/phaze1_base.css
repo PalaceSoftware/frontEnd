@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1838px;
-    height: 1150px;
+    width: 1710px;
+    height: 1069px;
     perspective: 2000px;
     perspective-origin: center center;
     overflow: hidden; /* 초과된 부분을 숨김 */

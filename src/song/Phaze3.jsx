@@ -176,7 +176,14 @@ export default function Phaze3() {
 
                 {blinkWindow && <div className="blink"></div>}
 
-               
+                <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
             </div>
         </div>
     );

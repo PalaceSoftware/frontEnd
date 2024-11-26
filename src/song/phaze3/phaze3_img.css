@@ -2,7 +2,7 @@
 .palace3 {
     position: absolute;
     top: 0;
-    height: 1150px;
+    height: 1069px;
     right: -2400px;
     z-index: 2;
     transition: transfrom 2s ease-in-out;
