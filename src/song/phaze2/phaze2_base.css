@@ -1,7 +1,7 @@
 .second-page {
     position: absolute;
-    width: 1710px;
-    height: 1069px;
+    width: 1838px;
+    height: 1150px;
     display: flex;
   }
 
@@ -25,7 +25,6 @@
     z-index: 1; /* 가장 아래에 표시 */
   }
 
-  
   /* 배경화면이 처음에는 투명하고, 나중에 선명하게 등장 */
   .background2_1 {
     position: absolute;

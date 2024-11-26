@@ -21,6 +21,9 @@ export default function Phaze3() {
 
     const navigate = useNavigate(); // For page navigation
 
+    const [hover, setHover] = useState(false);
+
+
     useEffect(() => {
 
         setTimeout(() => {
@@ -47,7 +50,7 @@ export default function Phaze3() {
           });
 
           setMovingPoint((prevPalacePosition) => {
-            const newMovingImgs = prevPalacePosition + delta * 0.1;
+            const newMovingImgs = prevPalacePosition + delta * 0.25;
             if(explainChange && newMovingImgs > 730) return Math.max(newMovingImgs, 730);
 
             if(imgs2Visible) return 2400;
@@ -120,6 +123,18 @@ export default function Phaze3() {
         };
       }, [scrollPosition, animationOn, backgroundVisible, imgsVisible, movingPoint]);
 
+      const handleClick = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+        const halfHeight = rect.height / 2;
+    
+        if (clickY < halfHeight) {
+          navigate("/phaze4"); // 상단 클릭 시 이동할 URL
+        } else {
+          navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+        }
+      };
+
       return (
         <div className={'third-page'}>
             <div className={'content3'}>
@@ -160,6 +175,8 @@ export default function Phaze3() {
                     className={`king3_2 ${imgs2Visible ? 'visible3_2' : ''}`}/>    
 
                 {blinkWindow && <div className="blink"></div>}
+
+               
             </div>
         </div>
     );

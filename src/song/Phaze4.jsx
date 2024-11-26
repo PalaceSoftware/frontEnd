@@ -14,6 +14,9 @@ export default function Phaze4() {
 
     const navigate = useNavigate(); // For page navigation
 
+    const [hover, setHover] = useState(false);
+
+
     useEffect(() => {
 
         setTimeout(() => {
@@ -67,6 +70,18 @@ export default function Phaze4() {
         };
     }, [scrollPosition, explainVisible, changeBackground]);
 
+    const handleClick = (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+      const halfHeight = rect.height / 2;
+  
+      if (clickY < halfHeight) {
+        navigate("/phaze5"); // 상단 클릭 시 이동할 URL
+      } else {
+        navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+      }
+    };
+
       return (
         <div className={'fourth-page'}>
             <div className={'content4'}>
@@ -88,6 +103,14 @@ export default function Phaze4() {
 
                 <img src="/images/song/phaze5/background5.png" className={`background4_2 ${changeBackground ? 'visible4_1' : ''}`}/>
 
+                <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
             </div>
         </div>
     );

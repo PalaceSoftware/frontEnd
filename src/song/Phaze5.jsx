@@ -19,6 +19,9 @@ export default function Phaze5() {
 
     const navigate = useNavigate(); // For page navigation
 
+    const [hover, setHover] = useState(false);
+
+
     useEffect(() => {
 
         setTimeout(() => {
@@ -90,7 +93,7 @@ export default function Phaze5() {
                   return 1.3;
                 }
 
-                const newSinhaScale = nowSinhaScale + (delta * 0.0001);
+                const newSinhaScale = nowSinhaScale + (delta * 0.0005);
                 return newSinhaScale;
             });
 
@@ -120,10 +123,22 @@ export default function Phaze5() {
         };
     }, [scrollPosition, explainVisible, zeoliteBack, zeolitesVisible]);
 
+    const handleClick = (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+      const halfHeight = rect.height / 2;
+  
+      if (clickY < halfHeight) {
+        navigate("/phaze6"); // 상단 클릭 시 이동할 URL
+      } else {
+        navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+      }
+    };
+
       return (
         <div className={'fifth-page'}>
             <div className={'content5'}>
-                <img src="/images/song/phaze5/background5.png" alt='background' className="background5"/>
+                <img src="/images/song/phaze5/background5.png" alt='background' className="background5_1"/>
                 <img src="/images/song/phaze5/fog5_1.png" className={`fog5_1 ${imgsVisible ? 'visible5' : fogVisible ? 'hidden5' : ''}`}/>       
                 <img src="/images/song/phaze5/fog5_2.png" className={`fog5_2 ${imgsVisible ? 'visible5' : fogVisible ? 'hidden5' : ''}`}/>
                 <img src="/images/song/phaze5/zeolite5.png" className={`zeolite5 ${(imgsVisible && !zeoliteBack) ? 'visible5' : (imgsVisible && zeoliteBack) ? 'hidden5' : ''}`}/>
@@ -151,6 +166,15 @@ export default function Phaze5() {
                 <img src="/images/song/phaze6/background6_1.png"
                   className={`next_background ${nextBackground ? 'showNext' : ''}`}
                 />
+
+<div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
             </div>
         </div>
     );

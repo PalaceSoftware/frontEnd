@@ -18,6 +18,9 @@ export default function Phaze2() {
     
     const navigate = useNavigate(); // For page navigation
 
+    const [hover, setHover] = useState(false);
+
+
     useEffect(() => {
       setTimeout(() => {
         setBackgroundVisible(true);
@@ -32,7 +35,7 @@ export default function Phaze2() {
             const delta = e.deltaY;
 
             setFogOffset((prevOffset) => {
-              const newOffset = prevOffset + delta * 0.5;
+              const newOffset = prevOffset + delta * 0.75;
               if (newOffset < 0) return 0; // fog가 0보다 작아지지 않도록 제한
               if (newOffset > 9000) return 9000;
               return newOffset;
@@ -107,11 +110,26 @@ export default function Phaze2() {
 
     window.addEventListener("wheel", handleWheel);
 
+
+
     return () => {
       window.removeEventListener("wheel", handleWheel);
     };
 
+
     }, [scrollPosition, backgroundVisible, imgsVisible, fogOffset, rightPalaceZoomed]);
+
+    const handleClick = (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+      const halfHeight = rect.height / 2;
+  
+      if (clickY < halfHeight) {
+        navigate("/phaze3"); // 상단 클릭 시 이동할 URL
+      } else {
+        navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+      }
+    };
     
   return (
     <div className="second-page">
@@ -142,9 +160,16 @@ export default function Phaze2() {
             <img src="images/song/phaze2/birds/birds2_1.png" className={`birds2_4 ${birdsVisible[1] ? 'visible2' : ''}`}/>
             <img src="images/song/phaze2/birds/birds2_2.png" className={`birds2_5 ${imgsVisible && birdsVisible[0] ? 'visible2' : ''}`}/>
 
-
-
+            
         </div>
+        <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
     </div>
   );
 }

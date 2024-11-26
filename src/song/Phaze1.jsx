@@ -24,6 +24,8 @@ export default function Phaze1() {
   
 
   const navigate = useNavigate(); // For page navigatio
+  const [hover, setHover] = useState(false);
+
   
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export default function Phaze1() {
       if(animationOn) {
         setMoveSunMoon((prev) => {
           // Sun과 Moon의 위치 변경
-          const newMove = prev + delta * 0.1; // 스크롤에 따라 이동
+          const newMove = prev + delta * 0.2; // 스크롤에 따라 이동
           if(newMove <= 0) return 0;
           const sunPosition = Math.min(newMove, 1261); // Sun의 최대 이동 거리
           const moonPosition = Math.max(-newMove, -1261); // Moon의 최소 이동 거리
@@ -130,6 +132,18 @@ export default function Phaze1() {
         }, 2000); // Wait for the zoom to complete (adjust time as needed)
       }, 2000);
     }, 2000);
+  };
+
+  const handleClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+    const halfHeight = rect.height / 2;
+
+    if (clickY < halfHeight) {
+      navigate("/phaze2"); // 상단 클릭 시 이동할 URL
+    } else {
+      navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+    }
   };
 
   return (
@@ -249,6 +263,14 @@ export default function Phaze1() {
 
         </div>
       </div>
+      <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
     </div>
   );
 }

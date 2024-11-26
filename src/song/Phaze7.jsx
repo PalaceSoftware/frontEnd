@@ -23,7 +23,6 @@ export default function SelectAppeal() {
 
   const [currentIndex, setCurrentIndex] = useState(0); // 중앙 이미지의 인덱스 (처음에는 세 번째 이미지)
   const [isRotating, setIsRotating] = useState(false);
-  const [rotationDirection, setRotationDirection] = useState(''); // 추가: 회전 방향 상태
   const [rotationAngle, setRotationAngle] = useState(0); // 현재 회전 값을 저장
   const [isClicked, setIsClicked] = useState(false); // 클릭 여부 관리
   const [showOpenImage, setShowOpenImage] = useState(false); // 추가: appeal_open101 이미지 표시 여부

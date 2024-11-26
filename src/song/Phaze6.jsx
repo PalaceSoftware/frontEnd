@@ -21,6 +21,8 @@ export default function Phaze6() {
 
     const navigate = useNavigate(); // For page navigation
 
+    const [hover, setHover] = useState(false);
+
     useEffect(() => {
         setTimeout(() => {
           setImgsVisible(true);
@@ -48,8 +50,8 @@ export default function Phaze6() {
             });
 
             setFogOpacity((prev) => {
-              const newOpacity = Math.min(Math.max(prev + delta * 0.00005, 0), 1); // 0과 1 사이로 제한
-              const newMove = prev + delta * 0.01; // 스크롤에 따라 이동
+              const newOpacity = Math.min(Math.max(prev + delta * 0.00015, 0), 1); // 0과 1 사이로 제한
+              const newMove = prev + delta * 0.04; // 스크롤에 따라 이동
     
               if(newMove <= 0) return 0;
               if(newMove >= 1950) return 1;
@@ -108,6 +110,18 @@ export default function Phaze6() {
     }, 2000);
     };
 
+    const handleClick = (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const clickY = e.clientY - rect.top; // 클릭 지점의 Y 좌표
+      const halfHeight = rect.height / 2;
+  
+      if (clickY < halfHeight) {
+        navigate("/phaze7"); // 상단 클릭 시 이동할 URL
+      } else {
+        navigate("/phaze7"); // 하단 클릭 시 이동할 URL
+      }
+    };
+
       return (
         <div className={'sixth-page'}>
             <div className={'content6'}>
@@ -143,6 +157,15 @@ export default function Phaze6() {
                 <img src="/images/song/phaze6/explain6_6.png" className={`explain6_6 ${changeImgs ? 'slideIn6_1' : ''}`}/>
 
                 <img src="/images/song/phaze6/background6_3.png" alt='background' className={`background6_3 ${finalBackground ? 'next_page6' : ''}`}/>
+
+                <div
+              className={`floating-image2 ${hover ? "hover" : ""}`}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleClick}
+            >
+              <img  src={hover ? "/images/skip.png" : "/images/skip_.png"}/>
+            </div>
             </div>
         </div>
     );
